@@ -85,6 +85,7 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
             Brush textBrush = ApplyOpacity(TextColor, TextOpacity);
             Brush bgBrush   = ApplyOpacity(BgColor,   BgOpacity);
 
+            RemoveDrawObject(tag);
             Draw.Text(
                 this, tag, true, label, 0, price, 0,
                 textBrush,
