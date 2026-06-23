@@ -87,7 +87,7 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
 
             RemoveDrawObject(tag);
             Draw.Text(
-                this, tag, true, label, 0, price, 0,
+                this, tag, false, label, 0, price, 0,
                 textBrush,
                 new Gui.Tools.SimpleFont("Arial", 11),
                 System.Windows.TextAlignment.Center,
