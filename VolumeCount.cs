@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Media;
+using System.Xml.Serialization;
 using NinjaTrader.Gui;
 using NinjaTrader.NinjaScript;
 using NinjaTrader.NinjaScript.DrawingTools;
@@ -19,8 +20,16 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
         public int TickOffset { get; set; }
 
         [NinjaScriptProperty]
+        [XmlIgnore]
         [Display(Name = "Text Color", GroupName = "Text", Order = 0)]
         public Brush TextColor { get; set; }
+
+        [Browsable(false)]
+        public string TextColorSerializable
+        {
+            get { return Serialize.BrushToString(TextColor); }
+            set { TextColor = Serialize.StringToBrush(value); }
+        }
 
         [NinjaScriptProperty]
         [Range(0, 100)]
@@ -28,8 +37,16 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
         public int TextOpacity { get; set; }
 
         [NinjaScriptProperty]
+        [XmlIgnore]
         [Display(Name = "Background Color", GroupName = "Background", Order = 0)]
         public Brush BgColor { get; set; }
+
+        [Browsable(false)]
+        public string BgColorSerializable
+        {
+            get { return Serialize.BrushToString(BgColor); }
+            set { BgColor = Serialize.StringToBrush(value); }
+        }
 
         [NinjaScriptProperty]
         [Range(0, 100)]
