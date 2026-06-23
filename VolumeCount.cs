@@ -16,7 +16,7 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
         // ── Configurable Properties ────────────────────────────────────────
 
         [NinjaScriptProperty]
-        [Display(Name = "Tick Offset Below Low", GroupName = "Layout", Order = 0)]
+        [Display(Name = "Pixel Offset Below Low", GroupName = "Layout", Order = 0)]
         public int TickOffset { get; set; }
 
         [NinjaScriptProperty]
@@ -79,22 +79,20 @@ namespace NinjaTrader.NinjaScript.Indicators.Cooz
             if (CurrentBar < 1) return;
 
             string tag   = "Vol_" + CurrentBar;
-            double price = Low[0] - (TickOffset * TickSize);
             string label = FormatVolume(Volume[0]);
 
-            // Build brushes with requested opacity
             Brush textBrush = ApplyOpacity(TextColor, TextOpacity);
             Brush bgBrush   = ApplyOpacity(BgColor,   BgOpacity);
 
             Draw.Text(
-    this, tag, true, label, 0, price, 0,
-    textBrush,
-    new Gui.Tools.SimpleFont("Arial", 11),
-    System.Windows.TextAlignment.Center,
-    Brushes.Transparent,   // outline brush
-    bgBrush,               // fill brush
-    25                      // outline opacity
-);
+                this, tag, true, label, 0, Low[0], TickOffset,
+                textBrush,
+                new Gui.Tools.SimpleFont("Arial", 11),
+                System.Windows.TextAlignment.Center,
+                Brushes.Transparent,
+                bgBrush,
+                25
+            );
         }
 
         // ── Helpers ───────────────────────────────────────────────────────
